@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: lovable-infrastructure
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/YOUR_USERNAME/lovable-gitops.git
+    targetRevision: main
+    path: infrastructure
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: lovable-core
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true

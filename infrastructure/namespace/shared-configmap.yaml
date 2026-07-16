@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lovable-shared-config
+  namespace: lovable-core
+
+data:
+  PREVIEW_DOMAIN: "previews.snapcart.dev"
+  PREVIEW_NAMESPACE: "lovable-previews"
+  PROXY_PORT: "80"
+  APP_FRONTEND_URL: "https://lovable.snapcart.dev"

@@ -37,3 +37,21 @@ Kubernetes
 ArgoCD continuously watches this repository.
 
 Any change to Kubernetes manifests will automatically be synchronized to the Kubernetes cluster.
+
+
+
+
+
+kubectl apply -f argocd\backend.yaml
+kubectl get applications -n argocd
+kubectl apply -f argocd\infrastructure.yaml
+
+
+kubectl get application lovable-backend -n argocd -o yaml
+
+kubectl kustomize backend
+
+
+
+
+kubectl apply -f argocd\backend.yaml
