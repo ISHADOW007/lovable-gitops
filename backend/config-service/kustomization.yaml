@@ -7,4 +7,4 @@ resources:
 
 images:
   - name: satyamgrao007/lovable-config-service
-    newTag: latest
+    newTag: "1"
