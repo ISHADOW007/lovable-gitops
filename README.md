@@ -85,3 +85,73 @@ kubectl describe application lovable-infrastructure -n argocd
 kubectl describe application lovable-stateful -n argocd
 kubectl describe application lovable-backend -n argocd
 kubectl describe application lovable-frontend -n argocd
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Install OWASP CLI once on your Jenkins server
+
+If Jenkins is running in Docker:
+
+docker exec -it jenkins bash
+
+Download the latest release:
+
+cd /opt
+
+wget https://github.com/dependency-check/DependencyCheck/releases/download/v12.2.2/dependency-check-12.2.2-release.zip
+
+apt update
+apt install unzip -y
+
+unzip dependency-check-12.2.2-release.zip
+
+ln -s /opt/dependency-check/bin/dependency-check.sh /usr/local/bin/dependency-check
+
+Verify:
+
+dependency-check --version
+
+You should see something like:
+
+Dependency-Check Core version 12.2.2
+
+
+
+
+kubectl apply -f frontend/lovable-frontend/service.yaml
+kubectl apply -f frontend/lovable-frontend/deployment.yam
