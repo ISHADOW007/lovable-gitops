@@ -9,4 +9,4 @@ resources:
 
 images:
   - name: satyamgrao007/lovable-account-service
-    newTag: "6"
+    newTag: "14"
