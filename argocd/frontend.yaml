@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/ISHADOW007/lovable-gitops.git
     targetRevision: main
-    path: frontend
+    path: frontend/lovable-frontend
 
   destination:
     server: https://kubernetes.default.svc
