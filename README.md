@@ -52,6 +52,36 @@ kubectl get application lovable-backend -n argocd -o yaml
 kubectl kustomize backend
 
 
+kubectl apply -f infrastructure\namespace\namespace.yaml
+kubectl apply -f infrastructure\namespace
+kubectl apply -f stateful\
 
+kubectl get applications -n argocd
 
+kubectl create secret generic app-secrets --from-env-file=.env -n lovable-previews
+kubectl create secret generic app-secrets --from-env-file=.env -n lovable-core
 kubectl apply -f argocd\backend.yaml
+
+
+kubectl port-forward svc/argocd-server -n argocd 8087:443
+
+
+
+
+
+
+
+kubectl apply -f argocd/infrastructure.yaml
+kubectl apply -f argocd/stateful.yaml
+kubectl apply -f argocd/backend.yaml
+kubectl apply -f argocd/frontend.yaml
+
+
+kubectl get applications -n argocd
+
+
+
+kubectl describe application lovable-infrastructure -n argocd
+kubectl describe application lovable-stateful -n argocd
+kubectl describe application lovable-backend -n argocd
+kubectl describe application lovable-frontend -n argocd

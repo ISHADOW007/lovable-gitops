@@ -7,7 +7,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/YOUR_USERNAME/lovable-gitops.git
+    repoURL: https://github.com/ISHADOW007/lovable-gitops.git
     targetRevision: main
     path: frontend
 
