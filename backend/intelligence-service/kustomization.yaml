@@ -6,6 +6,7 @@ namespace: lovable-core
 resources:
   - deployment.yaml
   - service.yaml
+  - servicemonitor.yaml
 
 images:
   - name: satyamgrao007/lovable-intelligence-service
