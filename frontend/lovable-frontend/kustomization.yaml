@@ -7,4 +7,4 @@ resources:
 
 images:
   - name: satyamgrao007/lovable-frontend
-    newTag: "19"
+    newTag: "20"

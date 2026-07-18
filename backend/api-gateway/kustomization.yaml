@@ -4,7 +4,12 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - service.yaml
+  - servicemonitor.yaml
 
 images:
   - name: satyamgrao007/lovable-api-gateway
+<<<<<<< HEAD
     newTag: "1"
+=======
+    newTag: "7"
+>>>>>>> 1e004538541c7d5fc732ba6ec13d75e46949e2fb

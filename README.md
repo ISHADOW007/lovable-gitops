@@ -155,3 +155,42 @@ Dependency-Check Core version 12.2.2
 
 kubectl apply -f frontend/lovable-frontend/service.yaml
 kubectl apply -f frontend/lovable-frontend/deployment.yam
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+kubectl create namespace monitoring
+
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install monitoring prometheus-community/kube-prometheus-stack --namespace monitoring
+kubectl get pods -n monitoring
+
+
+
+ kubectl port-forward -n monitoring svc/monitoring-grafana 8086:80
+ kubectl get secret monitoring-grafana -n monitoring -o jsonpath="{.data.admin-password}"
+ MWvRG2HUeEouwheMjEhfclU11hybhAiVQvp5gg7G
+
+
+
+
+ kubectl get svc -n lovable-core --show-labels
+ kubectl get svc api-gateway -n lovable-core -o yaml
+  kubectl get deployment api-gateway -n lovable-core --show-labels
+   kubectl get deployment account-service -n lovable-core --show-labels
+ 
+ 
