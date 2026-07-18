@@ -90,6 +90,38 @@ kubectl describe application lovable-frontend -n argocd
 
 
 
+Great. ✅ Your Spring Boot Micrometer + Actuator + Prometheus + ServiceMonitor integration is fully working.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+kubectl get servicemonitor api-gateway -n monitoring -o yaml
+
+
+
+
+
+
+kubectl port-forward svc/monitoring-kube-prometheus-prometheus -n monitoring 9090:9090
+
+
+
+
 
 
 
