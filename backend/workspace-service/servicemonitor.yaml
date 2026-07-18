@@ -1,14 +1,14 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: account-service
+  name: intelligence-service
   namespace: monitoring
   labels:
     release: monitoring
 spec:
   selector:
     matchLabels:
-      app: account-service
+      app: intelligence-service
 
   namespaceSelector:
     matchNames:

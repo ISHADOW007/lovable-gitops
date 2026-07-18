@@ -95,6 +95,14 @@ Great. ✅ Your Spring Boot Micrometer + Actuator + Prometheus + ServiceMonitor 
 
 
 
+git add .
+git commit -m "My changes"
+git pull --rebase origin main
+git push origin main
+
+
+
+
 
 
 
