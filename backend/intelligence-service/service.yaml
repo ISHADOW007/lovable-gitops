@@ -4,11 +4,14 @@ kind: Service
 metadata:
   name: intelligence-service
   namespace: lovable-core
+  labels:
+    app: intelligence-service
 
 spec:
   selector:
     app: intelligence-service
 
   ports:
-    - port: 80
+    - name: http
+      port: 80
       targetPort: 9030

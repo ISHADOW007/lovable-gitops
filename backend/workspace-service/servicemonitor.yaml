@@ -1,20 +1,17 @@
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
+apiVersion: v1
+kind: Service
+
 metadata:
   name: intelligence-service
-  namespace: monitoring
+  namespace: lovable-core
   labels:
-    release: monitoring
+    app: intelligence-service
+
 spec:
   selector:
-    matchLabels:
-      app: intelligence-service
+    app: intelligence-service
 
-  namespaceSelector:
-    matchNames:
-      - lovable-core
-
-  endpoints:
-    - port: http
-      path: /actuator/prometheus
-      interval: 15s
+  ports:
+    - name: http
+      port: 80
+      targetPort: 9030

@@ -4,11 +4,14 @@ kind: Service
 metadata:
   name: account-service
   namespace: lovable-core
+  labels:
+    app: account-service
 
 spec:
   selector:
     app: account-service
 
   ports:
-    - port: 80
+    - name: http
+      port: 80
       targetPort: 9050
