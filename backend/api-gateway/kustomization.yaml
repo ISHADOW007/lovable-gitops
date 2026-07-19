@@ -8,4 +8,4 @@ resources:
 
 images:
   - name: satyamgrao007/lovable-api-gateway
-    newTag: "11"
+    newTag: "12"
