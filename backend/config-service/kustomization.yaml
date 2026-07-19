@@ -8,4 +8,4 @@ resources:
 
 images:
   - name: satyamgrao007/lovable-config-service
-    newTag: "1"
+    newTag: "9"
