@@ -10,4 +10,4 @@ resources:
 
 images:
   - name: satyamgrao007/lovable-intelligence-service
-    newTag: "6"
+    newTag: "1"
