@@ -11,4 +11,4 @@ resources:
 
 images:
   - name: satyamgrao007/lovable-workspace-service
-    newTag: "9"
+    newTag: "10"
