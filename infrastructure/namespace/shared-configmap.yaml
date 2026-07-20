@@ -5,7 +5,13 @@ metadata:
   namespace: lovable-core
 
 data:
-  PREVIEW_DOMAIN: "previews.snapcart.dev"
-  PREVIEW_NAMESPACE: "lovable-previews"
+  PREVIEW_DOMAIN: ""
+  PREVIEW_NAMESPACE: ".previews.127.0.0.1.nip.io"
   PROXY_PORT: "80"
-  APP_FRONTEND_URL: "https://lovable.snapcart.dev"
+  APP_FRONTEND_URL: "https://127.0.0.1 lovable.localdev.me"
+
+
+
+
+
+# previews.snapcart.dev
