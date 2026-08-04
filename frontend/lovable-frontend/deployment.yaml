@@ -21,7 +21,7 @@ spec:
       containers:
         - name: lovable-frontend
 
-          image: satyamgrao007/lovable-frontend
+          image: satyamgrao007/lovable-frontend:19
 
           imagePullPolicy: Always
 
