@@ -52,7 +52,7 @@ metadata:
   namespace: lovable-core
 
 spec:
-  ingressClassName: nginx
+  ingressClassName: alb
 
   rules:
 
