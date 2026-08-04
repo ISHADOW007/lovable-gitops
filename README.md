@@ -103,6 +103,12 @@ git push origin main
 
 
 
+git add .
+git commit -m "Temporarily disable ServiceMonitor resources"
+git push origin main
+
+
+
 
 
 
