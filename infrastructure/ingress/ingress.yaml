@@ -57,7 +57,7 @@ spec:
   rules:
 
   # Frontend
-  - host: lovable.localdev.me
+  - host: lovable.snapcart.dev
     http:
       paths:
       - path: /
@@ -70,7 +70,7 @@ spec:
 
 
   # API Gateway
-  - host: api.localdev.me
+  - host: api.snapcart.dev
     http:
       paths:
       - path: /
@@ -83,7 +83,7 @@ spec:
 
 
   # Preview Applications (Wildcard)
-  - host: "*.previews.127.0.0.1.nip.io"
+  - host: "*.previews.snapcart.dev"
     http:
       paths:
       - path: /
@@ -93,3 +93,18 @@ spec:
             name: lovable-me-proxy
             port:
               number: 80
+
+
+
+
+
+
+
+
+# - host: "*.previews.127.0.0.1.nip.io"
+
+
+# - host: api.localdev.me
+
+
+# lovable.localdev.me
