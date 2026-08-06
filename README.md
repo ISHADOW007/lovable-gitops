@@ -110,6 +110,10 @@ git push origin main
 
 
 
+kubectl apply -f argocd/root.yaml
+
+
+
 
 
 

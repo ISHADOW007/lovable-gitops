@@ -4,9 +4,8 @@ kind: Kustomization
 namespace: lovable-core
 
 resources:
-  - rollout.yaml
+  - deployment.yaml
   - service.yaml
-  - preview-service.yaml
   # - servicemonitor.yaml
 
 images:
