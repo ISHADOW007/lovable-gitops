@@ -12,4 +12,4 @@ resources:
 
 images:
   - name: satyamgrao007/lovable-api-gateway
-    newTag: "4"
+    newTag: "1"
