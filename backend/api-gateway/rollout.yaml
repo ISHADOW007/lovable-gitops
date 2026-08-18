@@ -6,8 +6,7 @@ metadata:
   namespace: lovable-core
 
 spec:
-
-  replicas: 2
+  replicas: 3
 
   revisionHistoryLimit: 3
 
@@ -16,112 +15,95 @@ spec:
       app: api-gateway
 
   template:
-
     metadata:
       labels:
         app: api-gateway
 
     spec:
-
       containers:
-
         - name: api-gateway
 
-          image: satyamgrao007/lovable-api-gateway:v1
-
+          image: satyamgrao007/lovable-api-gateway:latest
           imagePullPolicy: Always
 
           ports:
             - name: http
               containerPort: 8080
 
-          resources:
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "k8s"
 
+            - name: SPRING_CONFIG_IMPORT
+              value: "configserver:http://config-service.lovable-core.svc.cluster.local:8888"
+
+            - name: CONFIG_SERVER_URL
+              value: "http://config-service.lovable-core.svc.cluster.local:8888"
+
+            - name: SPRING_CLOUD_CONFIG_FAIL_FAST
+              value: "false"
+
+            - name: SPRING_CLOUD_CONFIG_RETRY_MAX_ATTEMPTS
+              value: "10"
+
+            - name: SPRING_CLOUD_CONFIG_RETRY_INITIAL_INTERVAL
+              value: "3000"
+
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: JWT_SECRET
+
+          resources:
             requests:
-              cpu: 250m
-              memory: 512Mi
+              cpu: 80m
+              memory: 200Mi
 
             limits:
-              cpu: "1"
-              memory: 1Gi
+              cpu: 250m
+              memory: 250Mi
 
           readinessProbe:
             httpGet:
               path: /actuator/health
               port: 8080
-
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
-
-          livenessProbe:
-            httpGet:
-              path: /actuator/health
-              port: 8080
-
-            initialDelaySeconds: 60
-            periodSeconds: 20
+            initialDelaySeconds: 90
+            periodSeconds: 15
             timeoutSeconds: 5
             failureThreshold: 3
 
   strategy:
-
     canary:
 
-      # Stable Service
-      stableService: api-gateway
-
-      # Canary Service
       canaryService: api-gateway-canary
+      stableService: api-gateway-stable
 
       trafficRouting:
-
         alb:
-
-          # Existing Ingress
           ingress: lovable-main-ingress
-
-          # Root service used by the Ingress
-          rootService: api-gateway
-
-          # Service port
           servicePort: 80
 
       steps:
 
-        # ==========================
-        # 10% CANARY
-        # ==========================
-
+        # 1. Send 10% traffic to canary
         - setWeight: 10
 
+        # 2. Pause so we can observe canary
         - pause:
             duration: 2m
 
-
-        # ==========================
-        # 25% CANARY
-        # ==========================
-
+        # 3. Increase to 25%
         - setWeight: 25
 
         - pause:
             duration: 2m
 
-
-        # ==========================
-        # 50% CANARY
-        # ==========================
-
+        # 4. Increase to 50%
         - setWeight: 50
 
         - pause:
-            duration: 5m
+            duration: 2m
 
-
-        # ==========================
-        # 100% CANARY
-        # ==========================
-
+        # 5. Full traffic to new version
         - setWeight: 100
