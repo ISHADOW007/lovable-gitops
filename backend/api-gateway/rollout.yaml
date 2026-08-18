@@ -23,7 +23,7 @@ spec:
       containers:
         - name: api-gateway
 
-          image: satyamgrao007/lovable-api-gateway:latest
+          image: satyamgrao007/lovable-api-gateway
           imagePullPolicy: Always
 
           ports:
