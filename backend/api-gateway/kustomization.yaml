@@ -5,6 +5,10 @@ resources:
   - deployment.yaml
   - service.yaml
   - servicemonitor.yaml
+  - canary-service.yaml
+  - hpa.yaml
+  - rollout.yaml
+  
 
 images:
   - name: satyamgrao007/lovable-api-gateway

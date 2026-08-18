@@ -1,0 +1,127 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+
+metadata:
+  name: api-gateway
+  namespace: lovable-core
+
+spec:
+
+  replicas: 2
+
+  revisionHistoryLimit: 3
+
+  selector:
+    matchLabels:
+      app: api-gateway
+
+  template:
+
+    metadata:
+      labels:
+        app: api-gateway
+
+    spec:
+
+      containers:
+
+        - name: api-gateway
+
+          image: satyamgrao007/lovable-api-gateway:v1
+
+          imagePullPolicy: Always
+
+          ports:
+            - name: http
+              containerPort: 8080
+
+          resources:
+
+            requests:
+              cpu: 250m
+              memory: 512Mi
+
+            limits:
+              cpu: "1"
+              memory: 1Gi
+
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+
+            initialDelaySeconds: 60
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 3
+
+  strategy:
+
+    canary:
+
+      # Stable Service
+      stableService: api-gateway
+
+      # Canary Service
+      canaryService: api-gateway-canary
+
+      trafficRouting:
+
+        alb:
+
+          # Existing Ingress
+          ingress: lovable-main-ingress
+
+          # Root service used by the Ingress
+          rootService: api-gateway
+
+          # Service port
+          servicePort: 80
+
+      steps:
+
+        # ==========================
+        # 10% CANARY
+        # ==========================
+
+        - setWeight: 10
+
+        - pause:
+            duration: 2m
+
+
+        # ==========================
+        # 25% CANARY
+        # ==========================
+
+        - setWeight: 25
+
+        - pause:
+            duration: 2m
+
+
+        # ==========================
+        # 50% CANARY
+        # ==========================
+
+        - setWeight: 50
+
+        - pause:
+            duration: 5m
+
+
+        # ==========================
+        # 100% CANARY
+        # ==========================
+
+        - setWeight: 100
