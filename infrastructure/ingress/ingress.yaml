@@ -171,7 +171,7 @@ metadata:
     # ACM
     # ==========================================
 
-    alb.ingress.kubernetes.io/certificate-arn: "YOUR_ACM_CERTIFICATE_ARN"
+    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:ap-south-1:457724887427:certificate/70ea4a7f-592b-455c-92c2-7c1004e70432"
 
     alb.ingress.kubernetes.io/ssl-redirect: "443"
 
