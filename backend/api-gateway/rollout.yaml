@@ -6,6 +6,7 @@ metadata:
   namespace: lovable-core
 
 spec:
+
   replicas: 3
 
   revisionHistoryLimit: 3
@@ -15,15 +16,19 @@ spec:
       app: api-gateway
 
   template:
+
     metadata:
       labels:
         app: api-gateway
 
     spec:
+
       containers:
+
         - name: api-gateway
 
-          image: satyamgrao007/lovable-api-gateway
+          image: satyamgrao007/lovable-api-gateway:latest
+
           imagePullPolicy: Always
 
           ports:
@@ -31,6 +36,7 @@ spec:
               containerPort: 8080
 
           env:
+
             - name: SPRING_PROFILES_ACTIVE
               value: "k8s"
 
@@ -56,6 +62,7 @@ spec:
                   key: JWT_SECRET
 
           resources:
+
             requests:
               cpu: 80m
               memory: 200Mi
@@ -65,45 +72,51 @@ spec:
               memory: 250Mi
 
           readinessProbe:
+
             httpGet:
               path: /actuator/health
               port: 8080
+
             initialDelaySeconds: 90
             periodSeconds: 15
             timeoutSeconds: 5
             failureThreshold: 3
 
   strategy:
+
     canary:
 
-      canaryService: api-gateway
       stableService: api-gateway-stable
 
+      canaryService: api-gateway-canary
+
       trafficRouting:
+
         alb:
+
           ingress: lovable-main-ingress
+
           servicePort: 80
 
       steps:
 
-        # 1. Send 10% traffic to canary
+        # 10% canary
         - setWeight: 10
 
-        # 2. Pause so we can observe canary
         - pause:
             duration: 2m
 
-        # 3. Increase to 25%
+        # 25% canary
         - setWeight: 25
 
         - pause:
             duration: 2m
 
-        # 4. Increase to 50%
+        # 50% canary
         - setWeight: 50
 
         - pause:
             duration: 2m
 
-        # 5. Full traffic to new version
+        # 100% canary
         - setWeight: 100

@@ -6,12 +6,10 @@ metadata:
   namespace: lovable-core
 
 spec:
-
   selector:
     app: api-gateway
 
   ports:
-
     - name: http
       port: 80
       targetPort: 8080

@@ -2,26 +2,19 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 
 metadata:
-
   name: api-gateway
-
   namespace: lovable-core
 
 spec:
 
   scaleTargetRef:
-
     apiVersion: argoproj.io/v1alpha1
-
     kind: Rollout
-
     name: api-gateway
 
-
-  minReplicas: 2
+  minReplicas: 3
 
   maxReplicas: 10
-
 
   behavior:
 
@@ -30,22 +23,18 @@ spec:
       stabilizationWindowSeconds: 0
 
       policies:
-
         - type: Percent
           value: 100
           periodSeconds: 60
-
 
     scaleDown:
 
       stabilizationWindowSeconds: 300
 
       policies:
-
         - type: Percent
           value: 25
           periodSeconds: 60
-
 
   metrics:
 
