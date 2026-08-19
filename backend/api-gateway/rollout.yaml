@@ -76,7 +76,7 @@ spec:
   strategy:
     canary:
 
-      canaryService: api-gateway-canary
+      canaryService: api-gateway
       stableService: api-gateway-stable
 
       trafficRouting:
