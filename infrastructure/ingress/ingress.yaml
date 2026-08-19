@@ -149,16 +149,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 
 metadata:
-
   name: lovable-main-ingress
-
   namespace: lovable-core
 
   annotations:
-
-    # ==========================================
-    # AWS LOAD BALANCER CONTROLLER
-    # ==========================================
 
     alb.ingress.kubernetes.io/scheme: internet-facing
 
@@ -166,34 +160,19 @@ metadata:
 
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
 
-
-    # ==========================================
-    # ACM
-    # ==========================================
-
     alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:ap-south-1:457724887427:certificate/70ea4a7f-592b-455c-92c2-7c1004e70432"
 
     alb.ingress.kubernetes.io/ssl-redirect: "443"
 
-
-    # ==========================================
-    # EXTERNAL DNS
-    # ==========================================
-
     external-dns.alpha.kubernetes.io/hostname: "lovable.snapcart.dev,api.snapcart.dev,*.previews.snapcart.dev"
-
 
 spec:
 
   ingressClassName: alb
 
-
   rules:
 
-    # ==========================================
     # FRONTEND
-    # ==========================================
-
     - host: lovable.snapcart.dev
 
       http:
@@ -215,10 +194,7 @@ spec:
                   number: 80
 
 
-    # ==========================================
-    # API GATEWAY
-    # ==========================================
-
+    # API GATEWAY - ROOT/STABLE SERVICE
     - host: api.snapcart.dev
 
       http:
@@ -233,17 +209,14 @@ spec:
 
               service:
 
-                name: api-gateway
+                name: api-gateway-stable
 
                 port:
 
                   name: use-annotation
 
 
-    # ==========================================
     # PREVIEW PROXY
-    # ==========================================
-
     - host: "*.previews.snapcart.dev"
 
       http:
@@ -263,7 +236,6 @@ spec:
                 port:
 
                   number: 80
-
 
 
 
