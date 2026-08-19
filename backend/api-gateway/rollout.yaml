@@ -98,25 +98,52 @@ spec:
 
           servicePort: 80
 
-      steps:
+  steps:
 
-        # 10% canary
-        - setWeight: 10
+  # -------------------------------
+  # 10% CANARY
+  # -------------------------------
 
-        - pause:
-            duration: 2m
+  - setWeight: 10
 
-        # 25% canary
-        - setWeight: 25
+  - pause:
+      duration: 30s
 
-        - pause:
-            duration: 2m
+  - analysis:
+      templates:
+        - templateName: api-gateway-error-rate
 
-        # 50% canary
-        - setWeight: 50
 
-        - pause:
-            duration: 2m
+  # -------------------------------
+  # 25% CANARY
+  # -------------------------------
 
-        # 100% canary
-        - setWeight: 100
+  - setWeight: 25
+
+  - pause:
+      duration: 30s
+
+  - analysis:
+      templates:
+        - templateName: api-gateway-error-rate
+
+
+  # -------------------------------
+  # 50% CANARY
+  # -------------------------------
+
+  - setWeight: 50
+
+  - pause:
+      duration: 30s
+
+  - analysis:
+      templates:
+        - templateName: api-gateway-error-rate
+
+
+  # -------------------------------
+  # 100% CANARY
+  # -------------------------------
+
+  - setWeight: 100

@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+
+metadata:
+  name: api-gateway-error-rate
+  namespace: lovable-core
+
+spec:
+
+  metrics:
+
+    - name: error-rate
+
+      interval: 30s
+
+      count: 4
+
+      successCondition: result[0] < 0.05
+
+      failureLimit: 1
+
+      provider:
+
+        prometheus:
+
+          address: http://prometheus.monitoring.svc.cluster.local:9090
+
+          query: |
+            (
+              sum(
+                rate(
+                  http_server_requests_seconds_count{
+                    namespace="lovable-core",
+                    status=~"5.."
+                  }[1m]
+                )
+              )
+            )
+            /
+            (
+              sum(
+                rate(
+                  http_server_requests_seconds_count{
+                    namespace="lovable-core"
+                  }[1m]
+                )
+              )
+            )
