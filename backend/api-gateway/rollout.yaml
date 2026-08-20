@@ -4,7 +4,8 @@ kind: Rollout
 metadata:
   name: api-gateway
   namespace: lovable-core
-
+  annotations:
+    rollout.example.com/retry: "2"
 spec:
   replicas: 3
 
