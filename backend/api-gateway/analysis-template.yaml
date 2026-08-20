@@ -23,7 +23,7 @@ spec:
 
         prometheus:
 
-          address: http://prometheus.monitoring.svc.cluster.local:9090
+          address:http://monitoring-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090
 
           query: |
             (
